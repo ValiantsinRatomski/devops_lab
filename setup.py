@@ -5,7 +5,7 @@ setup(
     packages=find_packages(),
     entry_points={
         "console_scripts": [
-            "system = system.system:main",
+            "snapshot = system.system:main",
         ],
     },
     install_requires=[
