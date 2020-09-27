@@ -65,4 +65,5 @@ def get_pulls(state):
 
 
 if __name__ == '__main__':
+    state = None
     get_pulls(state)
