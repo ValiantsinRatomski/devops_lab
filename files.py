@@ -16,8 +16,7 @@ with tempfile.TemporaryDirectory() as tmpdir:
     with zipfile.ZipFile(zip_file, "r") as zf:
         zf.extractall(path=tmpdir)
 
-    itmpdir = tmpdir + "/" + zip_file[:-4]
-    for dirpath, dirnames, files in os.walk(itmpdir):
+    for dirpath, dirnames, files in os.walk(tmpdir):
         flag = True
         for file_name in files:
             if file_name == "__init__.py":
@@ -26,7 +25,7 @@ with tempfile.TemporaryDirectory() as tmpdir:
             logging.info(f"'{dirpath}' has been removed")
             shutil.rmtree(dirpath)
 
-    shutil.copytree(itmpdir, "./ans/")
+    shutil.copytree(tmpdir, "./ans/")
 
     new_zip = zip_file[:-4] + "_new.zip"
     with zipfile.ZipFile(new_zip, "w") as zf:
@@ -34,3 +33,5 @@ with tempfile.TemporaryDirectory() as tmpdir:
             zf.write(dirpath)
             for filename in files:
                 zf.write(os.path.join(dirpath, filename))
+
+    shutil.rmtree("./ans")
